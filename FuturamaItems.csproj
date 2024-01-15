@@ -24,11 +24,35 @@
 		<Reference Include="Assembly-CSharp">
 			<HintPath>C:\Users\Chris\Documents\dev\C#\Lethal Company Mods\FuturamaItems\Assembly-CSharp.dll</HintPath>
 		</Reference>
+		<Reference Include="Assembly-CSharp-firstpass">
+		  <HintPath>lib\Assembly-CSharp-firstpass.dll</HintPath>
+		</Reference>
+		<Reference Include="ClientNetworkTransform">
+		  <HintPath>lib\ClientNetworkTransform.dll</HintPath>
+		</Reference>
+		<Reference Include="DissonanceVoip">
+		  <HintPath>lib\DissonanceVoip.dll</HintPath>
+		</Reference>
+		<Reference Include="Facepunch Transport for Netcode for GameObjects">
+		  <HintPath>lib\Facepunch Transport for Netcode for GameObjects.dll</HintPath>
+		</Reference>
+		<Reference Include="Facepunch.Steamworks.Win64">
+		  <HintPath>lib\Facepunch.Steamworks.Win64.dll</HintPath>
+		</Reference>
+		<Reference Include="Newtonsoft.Json">
+		  <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+		</Reference>
 		<Reference Include="Unity.Netcode.Runtime">
 		  <HintPath>lib\Unity.Netcode.Runtime.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine">
 		  <HintPath>lib\UnityEngine.dll</HintPath>
+		</Reference>
+		<Reference Include="LethalLib">
+			<HintPath>lib\LethalLib.dll</HintPath>
+		</Reference>
+		<Reference Include="Terrain to Mesh">
+			<HintPath>lib\AmazingAssets.TerrainToMesh.dll</HintPath>
 		</Reference>
 	</ItemGroup>
   <ItemGroup>

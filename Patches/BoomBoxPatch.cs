@@ -20,7 +20,7 @@ namespace FuturamaItems.Patches
             //Maybe add the theme to the constructor
             /* IEnumerable<BoomboxItem> boombox = RoundManager.;*/
 
-            RoundManager rm = UnityEngine.Object.FindObjectOfType<RoundManager>(); ;
+            RoundManager rm = UnityEngine.Object.FindObjectOfType<RoundManager>();
 
 
             /*IEnumerable<BoomboxItem> boombox = UnityEngine.G*/
@@ -38,12 +38,6 @@ namespace FuturamaItems.Patches
 
 
 
-            //Spawning items is determined in the round manager with the SpawnScrapInLevel method. It gets spawnableScrab from the SelectableLevel component and goes into that level's
-            //List of spawnable scrap items until it hits a count
-            //So we'd have to add the scrap to each level and give it a rarity, a value, 
-            //Additionally, each item should extend GrabbableObject
-            //We can use the Item class and update the spawnPrefab with our models
-            //Additionally, there are audio clips for grabbing, dropping, pocketing, and throwing on the item that we can update with cool lines
         }
 
     }

@@ -25,7 +25,7 @@ namespace FuturamaItems
             //Create static reference to mod instance
             if(Instance == null)
             {
-                Instance = this;
+                Instance = this; 
             }
 
             mls = BepInEx.Logging.Logger.CreateLogSource(PluginInfo.PLUGIN_GUID);
