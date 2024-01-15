@@ -57,5 +57,6 @@
 	</ItemGroup>
   <ItemGroup>
     <Folder Include="lib\" />
+    <Folder Include="Assets\" />
   </ItemGroup>
 </Project>

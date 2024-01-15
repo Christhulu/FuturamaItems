@@ -28,6 +28,8 @@ namespace FuturamaItems.Patches
 
             SelectableLevel currentLevel = rm.currentLevel;
 
+            Item bender = FuturamaItemModBase.benderModelAsset.LoadAsset<Item>("/Assets/benderbundled");
+
             /*Items.RegisterScrap();*/
 
 

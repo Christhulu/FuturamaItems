@@ -11,13 +11,12 @@ namespace FuturamaItems
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class FuturamaItemModBase : BaseUnityPlugin
     {
-
         private readonly Harmony harmony = new(PluginInfo.PLUGIN_GUID);
         private static FuturamaItemModBase Instance;
 
         internal ManualLogSource mls;
 
-        public static AssetBundle benderModelAsset;
+        internal static AssetBundle benderAssetBundle;
 
         
         void Awake()
@@ -33,15 +32,17 @@ namespace FuturamaItems
             mls.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
 
             //Load bender model
-            string sAssemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            benderModelAsset = AssetBundle.LoadFromFile(Path.Combine(sAssemblyLocation, "bender"));
-            if (benderModelAsset == null)
+            string assetDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "benderbundled");
+            benderAssetBundle = AssetBundle.LoadFromFile(assetDir);
+
+            if (benderAssetBundle == null)
             {
                 mls.LogError("Failed to load custom assets."); // ManualLogSource for your plugin
                 return;
             }
 
-            harmony.PatchAll(typeof(FuturamaItemModBase));
+            Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PluginInfo.PLUGIN_GUID);
+            mls.LogInfo("Patched Futurama Items Mod");
 
 
         }
