@@ -27,11 +27,13 @@ namespace FuturamaItems
                 Instance = this; 
             }
 
+            //Create Logging Source
             mls = BepInEx.Logging.Logger.CreateLogSource(PluginInfo.PLUGIN_GUID);
-            // Plugin startup logic
+
+            // Plugin startup logging
             mls.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
 
-            //Load bender model
+            //Load bender asset bundle
             string assetDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "benderbundled");
             benderAssetBundle = AssetBundle.LoadFromFile(assetDir);
 
