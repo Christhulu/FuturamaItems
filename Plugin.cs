@@ -18,7 +18,6 @@ namespace FuturamaItems
 
         public static FuturamaItemModBase Instance;
 
-        [HarmonyPostfix]
         void Awake()
         {
             //Create static reference to mod instance
