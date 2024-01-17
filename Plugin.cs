@@ -29,10 +29,10 @@ namespace FuturamaItems
             
 
             //Create Logging Source
-            ManualLogSource mls = BepInEx.Logging.Logger.CreateLogSource(FuturamaItemModBase.GUID);
+            ManualLogSource mls = BepInEx.Logging.Logger.CreateLogSource(GUID);
 
             // Plugin startup logging
-            mls.LogInfo($"Plugin {FuturamaItemModBase.GUID} is loaded!");
+            mls.LogInfo($"Plugin {GUID} is loaded!");
 
             //Load bender asset bundle
             string assetDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "benderbundle");
@@ -44,7 +44,7 @@ namespace FuturamaItems
                 return;
             }
 
-            Item bender = benderAssetBundle.LoadAsset<Item>("/Assets/FuturamaItems/benderbundle.asset");
+            Item bender = benderAssetBundle.LoadAsset<Item>("Assets/FuturamaItems/BenderFigurine.asset");
 
             //Ensure audio doesn't play twice
             Utilities.FixMixerGroups(bender.spawnPrefab);
@@ -52,11 +52,8 @@ namespace FuturamaItems
             //This makes it so the other clients know what this object is
             NetworkPrefabs.RegisterNetworkPrefab(bender.spawnPrefab);
 
-            bender.maxValue = 200;
-            bender.minValue = 40;
-
             //Register item as scrap and as shop item
-            Items.RegisterScrap(bender, 300, Levels.LevelTypes.All);
+            Items.RegisterScrap(bender, 1000, Levels.LevelTypes.All);
 
             TerminalNode node = ScriptableObject.CreateInstance<TerminalNode>();
             node.clearPreviousText = true;
@@ -64,7 +61,7 @@ namespace FuturamaItems
 
             Items.RegisterShopItem(bender, null, null, node, 0);
 
-            Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), FuturamaItemModBase.GUID);
+            Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), GUID);
             mls.LogInfo("Patched Futurama Items Mod");
 
 
