@@ -35,7 +35,7 @@ namespace FuturamaItems
             mls.LogInfo($"Plugin {FuturamaItemModBase.GUID} is loaded!");
 
             //Load bender asset bundle
-            string assetDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "benderbundled");
+            string assetDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "benderbundle");
             AssetBundle benderAssetBundle = AssetBundle.LoadFromFile(assetDir);
 
             if (benderAssetBundle == null)
@@ -44,7 +44,7 @@ namespace FuturamaItems
                 return;
             }
 
-            Item bender = benderAssetBundle.LoadAsset<Item>("/Assets/benderbundled.asset");
+            Item bender = benderAssetBundle.LoadAsset<Item>("/Assets/FuturamaItems/benderbundle.asset");
 
             //Ensure audio doesn't play twice
             Utilities.FixMixerGroups(bender.spawnPrefab);
@@ -52,25 +52,8 @@ namespace FuturamaItems
             //This makes it so the other clients know what this object is
             NetworkPrefabs.RegisterNetworkPrefab(bender.spawnPrefab);
 
-            //Update bender item stats
-            bender.isConductiveMetal = true;
             bender.maxValue = 200;
             bender.minValue = 40;
-
-            //I'm using these to take sounds from temporarily
-            Turret turret = new Turret();
-            Shovel shovel = new Shovel();
-            WalkieTalkie w = new WalkieTalkie();
-
-
-            //Update sound effects
-            bender.grabSFX = turret.chargingSFX;
-
-            var dropIndex = UnityEngine.Random.Range(0, shovel.hitSFX.Length);
-            bender.dropSFX = shovel.hitSFX[dropIndex];
-
-            var pocketIndex = UnityEngine.Random.Range(0, w.startTransmissionSFX.Length);
-            bender.pocketSFX = w.startTransmissionSFX[pocketIndex];
 
             //Register item as scrap and as shop item
             Items.RegisterScrap(bender, 300, Levels.LevelTypes.All);
