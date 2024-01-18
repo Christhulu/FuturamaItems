@@ -5,11 +5,13 @@ using HarmonyLib;
 using LethalLib.Modules;
 using System.IO;
 using System.Reflection;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 namespace FuturamaItems
 {
     [BepInPlugin(GUID, NAME, VERSION)]
+    [BepInDependency(LethalLib.Plugin.ModGUID)]
     public class FuturamaItemModBase : BaseUnityPlugin
     {
         const string GUID = "csalex.futuramaItems";
@@ -46,14 +48,43 @@ namespace FuturamaItems
             Item bender = benderAssetBundle.LoadAsset<Item>("Assets/FuturamaItems/BenderFigurine.asset");
             bender.spawnPrefab.AddComponent<AudioMixerFixer>();
 
+            bender.spawnPrefab.AddComponent<PhysicsProp>();
+            var benderPhysicsProp = bender.spawnPrefab.GetComponent<PhysicsProp>();
+
+            benderPhysicsProp.itemProperties = bender;
+
+            //Fix I saw in EvaisaDev's Lethal Things plugin
+            if (bender.spawnPrefab.GetComponent<NetworkTransform>() == null && bender.spawnPrefab.GetComponent<NetworkTransform>() == null)
+            {
+                var networkTransform = bender.spawnPrefab.AddComponent<NetworkTransform>();
+                networkTransform.SlerpPosition = false;
+                networkTransform.Interpolate = false;
+                networkTransform.SyncPositionX = false;
+                networkTransform.SyncPositionY = false;
+                networkTransform.SyncPositionZ = false;
+                networkTransform.SyncScaleX = false;
+                networkTransform.SyncScaleY = false;
+                networkTransform.SyncScaleZ = false;
+                networkTransform.UseHalfFloatPrecision = true;
+            }
+
+
+            NetworkPrefabs.RegisterNetworkPrefab(bender.spawnPrefab);
+
+
+
             //Ensure audio doesn't play twice
             Utilities.FixMixerGroups(bender.spawnPrefab);
 
-            //This makes it so the other clients know what this object is
-            NetworkPrefabs.RegisterNetworkPrefab(bender.spawnPrefab);
 
             //Register item as scrap and as shop item
             Items.RegisterScrap(bender, 1000, Levels.LevelTypes.All);
+
+            TerminalNode node = ScriptableObject.CreateInstance<TerminalNode>();
+            node.clearPreviousText = true;
+            node.displayText = "Bite my shiny metal ass!\n\n";
+
+            Items.RegisterShopItem(bender, null, null, node, 0);
 
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), GUID);
