@@ -1,11 +1,11 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
+using FuturamaItems.Misc;
 using HarmonyLib;
 using LethalLib.Modules;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
-
 
 namespace FuturamaItems
 {
@@ -18,6 +18,7 @@ namespace FuturamaItems
 
         public static FuturamaItemModBase Instance;
 
+        [HarmonyPostfix]
         void Awake()
         {
             //Create static reference to mod instance
@@ -44,6 +45,7 @@ namespace FuturamaItems
             }
 
             Item bender = benderAssetBundle.LoadAsset<Item>("Assets/FuturamaItems/BenderFigurine.asset");
+            bender.spawnPrefab.AddComponent<AudioMixerFixer>();
 
             //Ensure audio doesn't play twice
             Utilities.FixMixerGroups(bender.spawnPrefab);

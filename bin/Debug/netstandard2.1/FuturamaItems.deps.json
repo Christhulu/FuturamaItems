@@ -13,6 +13,8 @@
           "BepInEx.Core": "5.4.21",
           "BepInEx.PluginInfoProps": "1.1.0",
           "UnityEngine.Modules": "2022.3.9",
+          "AmazingAssets.TerrainToMesh": "1.0.0.0",
+          "Assembly-CSharp-firstpass": "0.0.0.0",
           "Assembly-CSharp": "0.0.0.0",
           "LethalLib": "0.0.0.0",
           "Unity.Netcode.Runtime": "0.0.0.0"
@@ -355,6 +357,22 @@
         }
       },
       "UnityEngine.Modules/2022.3.9": {},
+      "AmazingAssets.TerrainToMesh/1.0.0.0": {
+        "runtime": {
+          "AmazingAssets.TerrainToMesh.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Assembly-CSharp-firstpass/0.0.0.0": {
+        "runtime": {
+          "Assembly-CSharp-firstpass.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "Assembly-CSharp/0.0.0.0": {
         "runtime": {
           "Assembly-CSharp.dll": {
@@ -660,6 +678,16 @@
       "sha512": "sha512-sSxqZjd05U0NWlX+eappdlsEuXFvDRHkUaClDVTocGRzCmIwNvgGJIPh22lGklIpNZ3cJZneYJkIUnEIazR8VA==",
       "path": "unityengine.modules/2022.3.9",
       "hashPath": "unityengine.modules.2022.3.9.nupkg.sha512"
+    },
+    "AmazingAssets.TerrainToMesh/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Assembly-CSharp-firstpass/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     },
     "Assembly-CSharp/0.0.0.0": {
       "type": "reference",
