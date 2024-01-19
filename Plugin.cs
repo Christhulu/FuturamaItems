@@ -7,6 +7,7 @@ using System.IO;
 using System.Reflection;
 using Unity.Netcode.Components;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace FuturamaItems
 {
@@ -46,16 +47,106 @@ namespace FuturamaItems
             }
 
             Item bender = benderAssetBundle.LoadAsset<Item>("Assets/FuturamaItems/BenderFigurine.asset");
-            bender.spawnPrefab.AddComponent<AudioMixerFixer>();
 
-            bender.spawnPrefab.AddComponent<PhysicsProp>();
-            var benderPhysicsProp = bender.spawnPrefab.GetComponent<PhysicsProp>();
+            if(bender.itemIcon == null) {
 
-            benderPhysicsProp.itemProperties = bender;
+                mls.LogError("For some reason Bender doesn't have any icon attached");
+
+                Sprite benderSprite = benderAssetBundle.LoadAsset<Sprite>("Assets/FuturamaItems/benderbyjordandiazandres.png");
+                bender.itemIcon = benderSprite;
+            
+            }
+
+
+            if(bender.dropSFX == null || bender.grabSFX == null  || bender.pocketSFX == null || bender.throwSFX == null)
+            {
+
+                mls.LogError("For some reason Bender doesn't have any sound effects attached");
+
+                AudioClip benderGrabClip = benderAssetBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_heywhatsthis.mp3");
+                AudioClip benderPocketClip = benderAssetBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_youstupid.mp3");
+                AudioClip benderDropClip = benderAssetBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_heyfleshies.mp3");
+                AudioClip benderThrowClip = benderAssetBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_doaflip.mp3");
+
+                bender.dropSFX = benderDropClip;
+                bender.grabSFX = benderGrabClip;
+                bender.pocketSFX = benderPocketClip;
+                bender.throwSFX = benderThrowClip;
+            }
+
+
+
+            if (bender.spawnPrefab.GetComponent<PhysicsProp>() == null)
+            {
+
+                mls.LogError("There's no physics prop on this for some reason");
+
+                bender.spawnPrefab.AddComponent<PhysicsProp>();
+
+                var benderPhysicsProp = bender.spawnPrefab.GetComponent<PhysicsProp>();
+
+                benderPhysicsProp.grabbableToEnemies = true;
+                benderPhysicsProp.grabbable = true;
+                benderPhysicsProp.itemProperties = bender;
+            }
+
+            if (bender.spawnPrefab.GetComponent<AudioSource>() == null)
+            {
+
+                mls.LogError("We don't have an audio source on this?");
+
+                bender.spawnPrefab.AddComponent<AudioSource>();
+
+                var benderAudioSource = bender.spawnPrefab.GetComponent<AudioSource>();
+
+                if(benderAudioSource.outputAudioMixerGroup == null) {
+                    mls.LogError("We don't have an audio mixer group on this either?");
+
+                    AudioMixerGroup benderMixerGroup = benderAssetBundle.LoadAsset<AudioMixerGroup>("Assets/FuturamaItems/DiageticMixer.mixer");
+
+                    benderAudioSource.outputAudioMixerGroup = benderMixerGroup;
+                    benderAudioSource.playOnAwake = false;
+                    benderAudioSource.volume = 1.0f;
+                    benderAudioSource.minDistance = 1.0f;
+                    benderAudioSource.maxDistance = 25.0f;
+                }
+
+            }
+
+
+            if (bender.spawnPrefab.GetComponent<AudioMixerFixer>() == null)
+            {
+
+                mls.LogError("We don't have an audio mixer fixer on this?");
+
+                bender.spawnPrefab.AddComponent<AudioMixerFixer>();
+            }
+
+
+            if (bender.spawnPrefab.GetComponentInChildren<ScanNodeProperties>() == null)
+            {
+
+                mls.LogError("For some reason there is no scan node properties script on this");
+
+                bender.spawnPrefab.AddComponent<ScanNodeProperties>();
+
+                ScanNodeProperties benderScanNodeScript = bender.spawnPrefab.GetComponent<ScanNodeProperties>();
+
+                benderScanNodeScript.maxRange = 13;
+                benderScanNodeScript.minRange = 1;
+                benderScanNodeScript.scrapValue = 50;
+                benderScanNodeScript.headerText = "Bender Figurine";
+                benderScanNodeScript.subText = "Value:";
+                benderScanNodeScript.creatureScanID = -1;
+                benderScanNodeScript.nodeType = 2;
+                benderScanNodeScript.requiresLineOfSight = true;
+            }
 
             //Fix I saw in EvaisaDev's Lethal Things plugin
-            if (bender.spawnPrefab.GetComponent<NetworkTransform>() == null && bender.spawnPrefab.GetComponent<NetworkTransform>() == null)
+            if (bender.spawnPrefab.GetComponent<NetworkTransform>() == null)
             {
+                mls.LogError("Bender does not have a network transform object");
+
                 var networkTransform = bender.spawnPrefab.AddComponent<NetworkTransform>();
                 networkTransform.SlerpPosition = false;
                 networkTransform.Interpolate = false;
@@ -78,7 +169,7 @@ namespace FuturamaItems
 
 
             //Register item as scrap and as shop item
-            Items.RegisterScrap(bender, 1000, Levels.LevelTypes.All);
+            /*Items.RegisterScrap(bender, 1000, Levels.LevelTypes.All);*/
 
             TerminalNode node = ScriptableObject.CreateInstance<TerminalNode>();
             node.clearPreviousText = true;
