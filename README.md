@@ -3,7 +3,7 @@ I'm working on a Lethal Company mod where I'm going to add some models from Futu
 
 ## Contributions:
 
-##Libraries Used:
+## Libraries Used:
 - LethalLib by Evaisa
 - Harmony
 
