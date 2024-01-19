@@ -151,12 +151,6 @@ namespace FuturamaItems
             //Register item as scrap and as shop item
             Items.RegisterScrap(bender, 1000, Levels.LevelTypes.All);
 
-            TerminalNode node = ScriptableObject.CreateInstance<TerminalNode>();
-            node.clearPreviousText = true;
-            node.displayText = "Bite my shiny metal ass!\n\n";
-
-            Items.RegisterShopItem(bender, null, null, node, 0);
-
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), GUID);
             mls.LogInfo("Patched Futurama Items Mod");
