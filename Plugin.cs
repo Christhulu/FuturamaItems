@@ -134,7 +134,7 @@ namespace FuturamaItems
                 benderScanNodeScript.minRange = 1;
                 benderScanNodeScript.scrapValue = 50;
                 benderScanNodeScript.headerText = "Bender Figurine";
-                benderScanNodeScript.subText = "Value:";
+                benderScanNodeScript.subText = "Value: ";
                 benderScanNodeScript.creatureScanID = -1;
                 benderScanNodeScript.nodeType = 2;
                 benderScanNodeScript.requiresLineOfSight = true;
