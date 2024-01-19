@@ -1,6 +1,5 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
-using FuturamaItems.Misc;
 using HarmonyLib;
 using LethalLib.Modules;
 using System.IO;

@@ -59,4 +59,8 @@
 			<HintPath>lib\UnityEngine.AssetBundleModule.dll</HintPath>
 		</Reference>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Thunderstore\" />
+	</ItemGroup>
 </Project>
