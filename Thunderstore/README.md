@@ -1,9 +1,9 @@
 # FuturamaItems
-I'm working on a Lethal Company mod where I'm going to add some models from Futurama into the game.
+Have you ever wanted to see items from the popular TV show Futurama as scrap items in Lethal Company?
 
 ## Contributions:
 
-##Libraries Used:
+## Libraries Used:
 - LethalLib by Evaisa
 - Harmony
 
@@ -16,6 +16,8 @@ I'm working on a Lethal Company mod where I'm going to add some models from Futu
 ## Sound Effects:
 - Half are from the TV series and half are from The Simpsons Game. Both are voiced by John DiMaggio.
 
+## Font
+Futurama Font by Darrell Johnson
 
 ## Dependencies:
 - LethalLib, and subsequently HookGenPatcher by Evaisa (since that is a dependency of that)
