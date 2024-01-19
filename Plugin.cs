@@ -90,6 +90,14 @@ namespace FuturamaItems
                 benderPhysicsProp.itemProperties = bender;
             }
 
+            if(bender.spawnPrefab.GetComponent<GrabbableObject>() == null)
+            {
+                mls.LogError("There's nothing grabbable on this for some reason");
+            }
+
+
+
+
             if (bender.spawnPrefab.GetComponent<AudioSource>() == null)
             {
 
@@ -113,16 +121,6 @@ namespace FuturamaItems
 
             }
 
-
-            if (bender.spawnPrefab.GetComponent<AudioMixerFixer>() == null)
-            {
-
-                mls.LogError("We don't have an audio mixer fixer on this?");
-
-                bender.spawnPrefab.AddComponent<AudioMixerFixer>();
-            }
-
-
             if (bender.spawnPrefab.GetComponentInChildren<ScanNodeProperties>() == null)
             {
 
@@ -142,24 +140,7 @@ namespace FuturamaItems
                 benderScanNodeScript.requiresLineOfSight = true;
             }
 
-            //Fix I saw in EvaisaDev's Lethal Things plugin
-            if (bender.spawnPrefab.GetComponent<NetworkTransform>() == null)
-            {
-                mls.LogError("Bender does not have a network transform object");
-
-                var networkTransform = bender.spawnPrefab.AddComponent<NetworkTransform>();
-                networkTransform.SlerpPosition = false;
-                networkTransform.Interpolate = false;
-                networkTransform.SyncPositionX = false;
-                networkTransform.SyncPositionY = false;
-                networkTransform.SyncPositionZ = false;
-                networkTransform.SyncScaleX = false;
-                networkTransform.SyncScaleY = false;
-                networkTransform.SyncScaleZ = false;
-                networkTransform.UseHalfFloatPrecision = true;
-            }
-
-
+            
             NetworkPrefabs.RegisterNetworkPrefab(bender.spawnPrefab);
 
 
@@ -169,7 +150,7 @@ namespace FuturamaItems
 
 
             //Register item as scrap and as shop item
-            /*Items.RegisterScrap(bender, 1000, Levels.LevelTypes.All);*/
+            Items.RegisterScrap(bender, 1000, Levels.LevelTypes.All);
 
             TerminalNode node = ScriptableObject.CreateInstance<TerminalNode>();
             node.clearPreviousText = true;
