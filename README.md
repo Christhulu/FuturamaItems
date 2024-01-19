@@ -16,6 +16,8 @@ Have you ever wanted to see items from the popular TV show Futurama as scrap ite
 ## Sound Effects:
 - Half are from the TV series and half are from The Simpsons Game. Both are voiced by John DiMaggio.
 
+## Font
+Futurama Font by Darrell Johnson
 
 ## Dependencies:
 - LethalLib, and subsequently HookGenPatcher by Evaisa (since that is a dependency of that)
