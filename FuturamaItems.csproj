@@ -61,6 +61,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Thunderstore\" />
+	  <Folder Include="Thunderstore\plugins\FuturamaItems\" />
 	</ItemGroup>
 </Project>

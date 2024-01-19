@@ -70,3 +70,5 @@ crashlytics-build.properties
 
 /FuturamaItems/bin
 /bin/Debug/netstandard2.1
+/obj
+/FuturamaItems/obj
