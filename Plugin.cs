@@ -150,7 +150,6 @@ namespace FuturamaItems
             Items.RegisterScrap(bender, 1000, Levels.LevelTypes.All);
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PLUGIN_GUID);
-            /*harmony.PatchAll(typeof(BoomBoxItemPatch));*/
             mls.LogInfo("Patched Futurama Items Mod");
 
         }
