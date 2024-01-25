@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3531213042
+CRC: 2465202840
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 25f85f589f1b7432bb1475a0e05f373d
+    Hash: 81821ddcfce6ce95c7039bf91ade2da3
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad21c1176c5f09ca5d27dc86bae23e9
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 25f85f589f1b7432bb1475a0e05f373d
+    Hash: 81821ddcfce6ce95c7039bf91ade2da3
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -59,9 +59,12 @@ SerializeReferenceClassIdentifiers:
   ClassName: Battery
 Assets:
 - Assets/FuturamaItems/bender_youstupid.mp3
+- Assets/FuturamaItems/hewantsabrain.mp3
 - Assets/AudioMixerController/Diagetic.mixer
+- Assets/FuturamaItems/futuramatheme_chopped_and_chewed.mp3
 - Assets/FuturamaItems/bender_doaflip.mp3
 - Assets/FuturamaItems/Diagetic.mixer
+- Assets/FuturamaItems/robothell.mp3
 - Assets/FuturamaItems/bender_heywhatsthis.mp3
 - Assets/FuturamaItems/BenderFigurine.asset
 - Assets/FuturamaItems/BenderBigger.prefab
