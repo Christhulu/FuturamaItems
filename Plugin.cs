@@ -16,9 +16,11 @@ namespace FuturamaItems
     {
         const string GUID = "csalex.futuramaItems";
         const string NAME = "Futurama Items";
-        const string VERSION = "1.0.0";
+        const string VERSION = "2.0.0";
 
         public static FuturamaItemModBase Instance;
+        //Create Logging Source
+        internal ManualLogSource mls = BepInEx.Logging.Logger.CreateLogSource(GUID);
 
         void Awake()
         {
@@ -27,10 +29,6 @@ namespace FuturamaItems
             {
                 Instance = this;
             }
-            
-
-            //Create Logging Source
-            ManualLogSource mls = BepInEx.Logging.Logger.CreateLogSource(GUID);
 
             // Plugin startup logging
             mls.LogInfo($"Plugin {GUID} is loaded!");
@@ -139,22 +137,16 @@ namespace FuturamaItems
                 benderScanNodeScript.requiresLineOfSight = true;
             }
 
-            
             NetworkPrefabs.RegisterNetworkPrefab(bender.spawnPrefab);
-
-
 
             //Ensure audio doesn't play twice
             Utilities.FixMixerGroups(bender.spawnPrefab);
 
-
             //Register item as scrap and as shop item
             Items.RegisterScrap(bender, 1000, Levels.LevelTypes.All);
 
-
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), GUID);
             mls.LogInfo("Patched Futurama Items Mod");
-
 
         }
     }

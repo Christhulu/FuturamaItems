@@ -27,6 +27,9 @@
 		<Reference Include="Assembly-CSharp-firstpass">
 			<HintPath>lib\Assembly-CSharp-firstpass.dll</HintPath>
 		</Reference>
+		<Reference Include="LC_SoundTool">
+		  <HintPath>lib\LC_SoundTool.dll</HintPath>
+		</Reference>
 		<Reference Include="UnityEngine">
 			<HintPath>lib\UnityEngine.dll</HintPath>
 		</Reference>
@@ -61,6 +64,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Sounds\mp3\" />
 	  <Folder Include="Thunderstore\plugins\FuturamaItems\" />
 	</ItemGroup>
 </Project>
