@@ -26,6 +26,8 @@ namespace FuturamaItems
 
         internal AssetBundle futuramaBundle;
 
+        public static AudioClip themeSong;
+
         void Awake()
         {
             //Create static reference to mod instance
@@ -148,6 +150,22 @@ namespace FuturamaItems
 
             //Register item as scrap and as shop item
             Items.RegisterScrap(bender, 1000, Levels.LevelTypes.All);
+
+
+            #region Boombox Audio Patch Asset Loading
+            //Load and append songs to boombox audio
+            themeSong = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/futuramatheme_chopped_and_chewed.mp3");
+/*            AudioClip robotHell = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/robothell.mp3");
+            AudioClip heWantsABrain = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/hewantsabrain.mp3");
+
+            newMusic = new AudioClip[]{ themeSong, robotHell, heWantsABrain };*/
+
+            #endregion Boombox Audio Patch Asset Loading
+
+
+
+
+
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PLUGIN_GUID);
             mls.LogInfo("Patched Futurama Items Mod");

@@ -21,15 +21,9 @@ namespace FuturamaItems.Patches
                 __instance.musicAudios[i] = originalMusic[i];
             }
 
-            
-            //Load and append songs to boombox audio
-            AudioClip themeSong = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/futuramatheme_chopped_and_chewed.mp3");
-            AudioClip robotHell = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/robothell.mp3");
-            AudioClip heWantsABrain = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/hewantsabrain.mp3");
+            /*__instance.musicAudios.AddRangeToArray(FuturamaItemModBase.newMusic);*/
+            __instance.musicAudios[__instance.musicAudios.Length - 1] = FuturamaItemModBase.themeSong;
 
-            AudioClip[] newMusic = { themeSong, robotHell, heWantsABrain};
-
-            __instance.musicAudios.AddRangeToArray(newMusic);
             FuturamaItemModBase.Instance.mls.LogInfo($"Patched {__instance} with 3 new music track!");
         }
 
