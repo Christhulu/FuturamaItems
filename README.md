@@ -1,6 +1,9 @@
 # FuturamaItems
 Have you ever wanted to see items from the popular TV show Futurama as scrap items in Lethal Company?
 
+## Download Instructions
+You can download this on [Thunderstore](https://thunderstore.io/c/lethal-company/p/csalex/FuturamaItems/)
+
 ## Contributions:
 
 ## Libraries Used:
