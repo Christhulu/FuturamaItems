@@ -1,8 +1,5 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using LCSoundTool.Resources;
-using BepInEx.Logging;
-
 
 namespace FuturamaItems.Patches
 {
@@ -15,8 +12,6 @@ namespace FuturamaItems.Patches
         public static void Start_Patch(BoomboxItem __instance)
         {
 
-            const string GUID = "csalex.futuramaItems";
-
             AudioClip[] originalMusic = __instance.musicAudios;
 
             __instance.musicAudios = new AudioClip[originalMusic.Length + 3];
@@ -26,7 +21,15 @@ namespace FuturamaItems.Patches
                 __instance.musicAudios[i] = originalMusic[i];
             }
 
-            __instance.musicAudios.AddRangeToArray(originalMusic);
+            
+            //Load and append songs to boombox audio
+            AudioClip themeSong = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/futuramatheme_chopped_and_chewed.mp3");
+            AudioClip robotHell = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/robothell.mp3");
+            AudioClip heWantsABrain = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/hewantsabrain.mp3");
+
+            AudioClip[] newMusic = { themeSong, robotHell, heWantsABrain};
+
+            __instance.musicAudios.AddRangeToArray(newMusic);
             FuturamaItemModBase.Instance.mls.LogInfo($"Patched {__instance} with 3 new music track!");
         }
 

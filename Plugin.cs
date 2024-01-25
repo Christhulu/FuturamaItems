@@ -1,26 +1,30 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
+using FuturamaItems.Patches;
 using HarmonyLib;
 using LethalLib.Modules;
 using System.IO;
 using System.Reflection;
-using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.Audio;
 
 namespace FuturamaItems
 {
-    [BepInPlugin(GUID, NAME, VERSION)]
+    [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]
     [BepInDependency(LethalLib.Plugin.ModGUID)]
     public class FuturamaItemModBase : BaseUnityPlugin
     {
-        const string GUID = "csalex.futuramaItems";
-        const string NAME = "Futurama Items";
-        const string VERSION = "2.0.0";
+        private const string PLUGIN_GUID = "csalex.futuramaItems";
+        private const string PLUGIN_NAME = "Futurama Items";
+        private const string PLUGIN_VERSION = "2.0.0";
 
         public static FuturamaItemModBase Instance;
         //Create Logging Source
-        internal ManualLogSource mls = BepInEx.Logging.Logger.CreateLogSource(GUID);
+        internal ManualLogSource mls = BepInEx.Logging.Logger.CreateLogSource(PLUGIN_GUID);
+
+        private readonly Harmony harmony = new Harmony(PLUGIN_GUID);
+
+        internal AssetBundle futuramaBundle;
 
         void Awake()
         {
@@ -31,25 +35,25 @@ namespace FuturamaItems
             }
 
             // Plugin startup logging
-            mls.LogInfo($"Plugin {GUID} is loaded!");
+            mls.LogInfo($"Plugin {PLUGIN_GUID} is loaded!");
 
             //Load bender asset bundle
             string assetDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "benderbundle");
-            AssetBundle benderAssetBundle = AssetBundle.LoadFromFile(assetDir);
+            futuramaBundle = AssetBundle.LoadFromFile(assetDir);
 
-            if (benderAssetBundle == null)
+            if (futuramaBundle == null)
             {
                 mls.LogError("Failed to load custom assets."); // ManualLogSource for your plugin
                 return;
             }
 
-            Item bender = benderAssetBundle.LoadAsset<Item>("Assets/FuturamaItems/BenderFigurine.asset");
+            Item bender = futuramaBundle.LoadAsset<Item>("Assets/FuturamaItems/BenderFigurine.asset");
 
             if(bender.itemIcon == null) {
 
                 mls.LogError("For some reason Bender doesn't have any icon attached");
 
-                Sprite benderSprite = benderAssetBundle.LoadAsset<Sprite>("Assets/FuturamaItems/benderbyjordandiazandres.png");
+                Sprite benderSprite = futuramaBundle.LoadAsset<Sprite>("Assets/FuturamaItems/benderbyjordandiazandres.png");
                 bender.itemIcon = benderSprite;
             
             }
@@ -60,10 +64,10 @@ namespace FuturamaItems
 
                 mls.LogError("For some reason Bender doesn't have any sound effects attached");
 
-                AudioClip benderGrabClip = benderAssetBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_heywhatsthis.mp3");
-                AudioClip benderPocketClip = benderAssetBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_youstupid.mp3");
-                AudioClip benderDropClip = benderAssetBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_heyfleshies.mp3");
-                AudioClip benderThrowClip = benderAssetBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_doaflip.mp3");
+                AudioClip benderGrabClip = futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_heywhatsthis.mp3");
+                AudioClip benderPocketClip = futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_youstupid.mp3");
+                AudioClip benderDropClip = futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_heyfleshies.mp3");
+                AudioClip benderThrowClip = futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_doaflip.mp3");
 
                 bender.dropSFX = benderDropClip;
                 bender.grabSFX = benderGrabClip;
@@ -107,7 +111,7 @@ namespace FuturamaItems
                 if(benderAudioSource.outputAudioMixerGroup == null) {
                     mls.LogError("We don't have an audio mixer group on this either?");
 
-                    AudioMixerGroup benderMixerGroup = benderAssetBundle.LoadAsset<AudioMixerGroup>("Assets/FuturamaItems/DiageticMixer.mixer");
+                    AudioMixerGroup benderMixerGroup = futuramaBundle.LoadAsset<AudioMixerGroup>("Assets/FuturamaItems/DiageticMixer.mixer");
 
                     benderAudioSource.outputAudioMixerGroup = benderMixerGroup;
                     benderAudioSource.playOnAwake = false;
@@ -145,7 +149,8 @@ namespace FuturamaItems
             //Register item as scrap and as shop item
             Items.RegisterScrap(bender, 1000, Levels.LevelTypes.All);
 
-            Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), GUID);
+            Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PLUGIN_GUID);
+            /*harmony.PatchAll(typeof(BoomBoxItemPatch));*/
             mls.LogInfo("Patched Futurama Items Mod");
 
         }
