@@ -1,6 +1,4 @@
 -   **2.0.0**
-
-    -   Improved sound support through LC_SoundTool plugin
     -   Added 3 new songs to the boombox item based on the show
         -  Christopher Tyng "Futurama Original Series Mix (C.Tyng Extended Remix)" (Old radio Remix)
         -  The Robot Devil "Robot Hell" (Old radio Remix)
