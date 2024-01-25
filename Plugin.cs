@@ -26,7 +26,10 @@ namespace FuturamaItems
 
         internal AssetBundle futuramaBundle;
 
+        //Audio Clips for use in the BoomBoxItemPatch
         public static AudioClip themeSong;
+        public static AudioClip robotHellSong;
+        public static AudioClip heWantsABrainSong;
 
         void Awake()
         {
@@ -155,17 +158,10 @@ namespace FuturamaItems
             #region Boombox Audio Patch Asset Loading
             //Load and append songs to boombox audio
             themeSong = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/futuramatheme_chopped_and_chewed.mp3");
-/*            AudioClip robotHell = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/robothell.mp3");
-            AudioClip heWantsABrain = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/hewantsabrain.mp3");
-
-            newMusic = new AudioClip[]{ themeSong, robotHell, heWantsABrain };*/
+            robotHellSong = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/robothell.mp3");
+            heWantsABrainSong = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/hewantsabrain.mp3");
 
             #endregion Boombox Audio Patch Asset Loading
-
-
-
-
-
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PLUGIN_GUID);
             mls.LogInfo("Patched Futurama Items Mod");

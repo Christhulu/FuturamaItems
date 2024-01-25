@@ -21,8 +21,9 @@ namespace FuturamaItems.Patches
                 __instance.musicAudios[i] = originalMusic[i];
             }
 
-            /*__instance.musicAudios.AddRangeToArray(FuturamaItemModBase.newMusic);*/
-            __instance.musicAudios[__instance.musicAudios.Length - 1] = FuturamaItemModBase.themeSong;
+            __instance.musicAudios[__instance.musicAudios.Length - 3] = FuturamaItemModBase.themeSong;
+            __instance.musicAudios[__instance.musicAudios.Length - 2] = FuturamaItemModBase.robotHellSong;
+            __instance.musicAudios[__instance.musicAudios.Length - 1] = FuturamaItemModBase.heWantsABrainSong;
 
             FuturamaItemModBase.Instance.mls.LogInfo($"Patched {__instance} with 3 new music track!");
         }
