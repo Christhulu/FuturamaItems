@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace FuturamaItems.Patches
@@ -12,18 +13,17 @@ namespace FuturamaItems.Patches
         public static void Start_Patch(BoomboxItem __instance)
         {
 
-            AudioClip[] originalMusic = __instance.musicAudios;
+            #region Boombox Audio Patch Asset Loading
+            //Load and append songs to boombox audio
 
-            __instance.musicAudios = new AudioClip[originalMusic.Length + 3];
+            AudioClip themeSong = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/futuramatheme_chopped_and_chewed.mp3");
+            AudioClip robotHellSong = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/robothell.mp3");
+            AudioClip heWantsABrainSong = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/hewantsabrain.mp3");
 
-            for (int i = 0; i < originalMusic.Length; i++)
-            {
-                __instance.musicAudios[i] = originalMusic[i];
-            }
+            #endregion Boombox Audio Patch Asset Loading
 
-            __instance.musicAudios[__instance.musicAudios.Length - 3] = FuturamaItemModBase.themeSong;
-            __instance.musicAudios[__instance.musicAudios.Length - 2] = FuturamaItemModBase.robotHellSong;
-            __instance.musicAudios[__instance.musicAudios.Length - 1] = FuturamaItemModBase.heWantsABrainSong;
+            AudioClip[] originalMusic = { themeSong, robotHellSong, heWantsABrainSong};
+            __instance.musicAudios.AddRangeToArray(originalMusic);
 
             FuturamaItemModBase.Instance.mls.LogInfo($"Patched {__instance} with 3 new music track!");
         }
