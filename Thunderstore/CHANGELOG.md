@@ -2,6 +2,7 @@
     - Reduced spawn rate of Bender item to improve compatibility with other scrap mods
     - Updated LethalLib dependency version
     - Code restructuring, optimizations
+    - Patch boombox in a more scalable way
 
 -   **2.0.0**
     -   Added 3 new songs to the boombox item based on the show

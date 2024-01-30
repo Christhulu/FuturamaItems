@@ -1,13 +1,6 @@
-﻿using BepInEx;
-using BepInEx.Logging;
-using HarmonyLib;
-using LethalLib.Modules;
-using System.IO;
-using System.Reflection;
+﻿using LethalLib.Modules;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.Audio;
-using FuturamaItems;
 
 namespace FuturamaItems.Modules
 {

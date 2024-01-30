@@ -22,10 +22,15 @@ namespace FuturamaItems.Patches
 
             #endregion Boombox Audio Patch Asset Loading
 
-            AudioClip[] originalMusic = { themeSong, robotHellSong, heWantsABrainSong};
-            __instance.musicAudios.AddRangeToArray(originalMusic);
+            AudioClip[] originalMusic = __instance.musicAudios;
+            AudioClip[] newMusic = { themeSong, robotHellSong, heWantsABrainSong};
 
-            FuturamaItemModBase.Instance.mls.LogInfo($"Patched {__instance} with 3 new music track!");
+            __instance.musicAudios = new AudioClip[] { };
+
+            __instance.musicAudios.AddRangeToArray(originalMusic);
+            __instance.musicAudios.AddRangeToArray(newMusic);
+
+            FuturamaItemModBase.Instance.mls.LogInfo($"Patched {__instance} with {newMusic.Length} new music tracks!");
         }
 
 
