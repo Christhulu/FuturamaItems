@@ -11,7 +11,7 @@ namespace FuturamaItems.Patches
 
     internal class BenderScrapPatch
     {
-        [HarmonyPatch(nameof(SelectableLevel.spawnableScrap))]
+        [HarmonyPatch(nameof(RoundManager.SpawnScrapInLevel))]
         [HarmonyPostfix]
         public static void Start_Patch()
         {
@@ -117,7 +117,7 @@ namespace FuturamaItems.Patches
             Utilities.FixMixerGroups(bender.spawnPrefab);
 
             //Register item as scrap and as shop item
-            Items.RegisterScrap(bender, 1000, Levels.LevelTypes.All);
+            Items.RegisterScrap(bender, 300, Levels.LevelTypes.All);
 
         }
     }
