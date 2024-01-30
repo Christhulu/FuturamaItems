@@ -1,4 +1,6 @@
 -   **2.1.0**
+    - Reduced spawn rate of Bender item to improve compatibility with other scrap mods
+    - Updated LethalLib dependency version
     - Code restructuring, optimizations
 
 -   **2.0.0**

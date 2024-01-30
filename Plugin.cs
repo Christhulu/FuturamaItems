@@ -6,7 +6,9 @@ using LethalLib.Modules;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Audio;
+using FuturamaItems.Modules;
 
 namespace FuturamaItems
 {
@@ -23,6 +25,8 @@ namespace FuturamaItems
         internal ManualLogSource mls = BepInEx.Logging.Logger.CreateLogSource(PLUGIN_GUID);
 
         internal AssetBundle futuramaBundle;
+        internal Item bender;
+        internal BenderUtilities benderUtilities;
 
         void Awake()
         {
@@ -45,9 +49,15 @@ namespace FuturamaItems
                 return;
             }
 
+            //Set up scrap utility classes
+            benderUtilities = new BenderUtilities();
+            benderUtilities.SetupBenderItem();
+
+
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PLUGIN_GUID);
             mls.LogInfo("Patched Futurama Items Mod");
 
         }
+
     }
 }

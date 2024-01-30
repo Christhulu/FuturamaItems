@@ -22,41 +22,41 @@
 
 	<ItemGroup>
 		<Reference Include="Assembly-CSharp" Publicize="True" PrivateAssets="all">
-			<HintPath>lib\Assembly-CSharp.dll</HintPath>
+			<HintPath>Libraries\Assembly-CSharp.dll</HintPath>
 		</Reference>
 		<Reference Include="Assembly-CSharp-firstpass">
-			<HintPath>lib\Assembly-CSharp-firstpass.dll</HintPath>
+			<HintPath>Libraries\Assembly-CSharp-firstpass.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine">
-			<HintPath>lib\UnityEngine.dll</HintPath>
+			<HintPath>Libraries\UnityEngine.dll</HintPath>
 		</Reference>
 		<Reference Include="LethalLib">
-			<HintPath>lib\LethalLib.dll</HintPath>
+			<HintPath>Libraries\LethalLib.dll</HintPath>
 		</Reference>
 		<Reference Include="MMHOOK_Assembly-CSharp">
-			<HintPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\plugins\MMHOOK\MMHOOK_Assembly-CSharp.dll</HintPath>
+			<HintPath>Libraries\MMHOOK_Assembly-CSharp.dll</HintPath>
 		</Reference>
 		<Reference Include="ClientNetworkTransform">
-			<HintPath>lib\ClientNetworkTransform.dll</HintPath>
+			<HintPath>Libraries\ClientNetworkTransform.dll</HintPath>
 		</Reference>
 		<Reference Include="DissonanceVoip">
-			<HintPath>lib\DissonanceVoip.dll</HintPath>
+			<HintPath>Libraries\DissonanceVoip.dll</HintPath>
 		</Reference>
 		<Reference Include="Unity.Netcode.Components">
-		  <HintPath>lib\Unity.Netcode.Components.dll</HintPath>
+		  <HintPath>Libraries\Unity.Netcode.Components.dll</HintPath>
 		</Reference>
 		<Reference Include="Unity.Netcode.Runtime">
-			<HintPath>lib\Unity.Netcode.Runtime.dll</HintPath>
+			<HintPath>Libraries\Unity.Netcode.Runtime.dll</HintPath>
 		</Reference>
 		<Reference Include="Unity.RenderPipelines.HighDefinition.Runtime">
-			<HintPath>lib\Unity.RenderPipelines.HighDefinition.Runtime.dll</HintPath>
+			<HintPath>Libraries\Unity.RenderPipelines.HighDefinition.Runtime.dll</HintPath>
 		</Reference>
 
 		<Reference Include="Terrain to Mesh">
-			<HintPath>lib\AmazingAssets.TerrainToMesh.dll</HintPath>
+			<HintPath>Libraries\AmazingAssets.TerrainToMesh.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine.AssetBundleModule">
-			<HintPath>lib\UnityEngine.AssetBundleModule.dll</HintPath>
+			<HintPath>Libraries\UnityEngine.AssetBundleModule.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 </Project>

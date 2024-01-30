@@ -1,42 +1,63 @@
-﻿using HarmonyLib;
+﻿using BepInEx;
+using BepInEx.Logging;
+using HarmonyLib;
 using LethalLib.Modules;
+using System.IO;
+using System.Reflection;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Audio;
+using FuturamaItems;
 
-namespace FuturamaItems.Patches
+namespace FuturamaItems.Modules
 {
-
-    //Maybe this should be roundmanager, maybe it should be selectableLevel. Not sure
-    [HarmonyPatch(typeof(SelectableLevel))]
-
-    internal class BenderScrapPatch
+    public class BenderUtilities
     {
-        [HarmonyPatch(nameof(RoundManager.SpawnScrapInLevel))]
-        [HarmonyPostfix]
-        public static void Start_Patch()
-        {
-            Item bender = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<Item>("Assets/FuturamaItems/BenderFigurine.asset");
 
+        public static BenderUtilities Instance;
+
+        public BenderUtilities() {
+
+            Instance ??= this;
+
+            Init();
+        }
+
+        private static void Init()
+        {
+            Instance.LoadBenderAsset(ref FuturamaItemModBase.Instance.bender, ref FuturamaItemModBase.Instance.futuramaBundle);
+        }
+
+        private void LoadBenderAsset(ref Item bender, ref AssetBundle futuramaBundle)
+        {
+            bender = futuramaBundle.LoadAsset<Item>("Assets/FuturamaItems/BenderFigurine.asset");
+        }
+
+        private void UpdateBenderIcon(ref Item bender, ref AssetBundle futuramaBundle)
+        {
             if (bender.itemIcon == null)
             {
 
                 FuturamaItemModBase.Instance.mls.LogError("For some reason Bender doesn't have any icon attached");
 
-                Sprite benderSprite = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<Sprite>("Assets/FuturamaItems/benderbyjordandiazandres.png");
+                Sprite benderSprite = futuramaBundle.LoadAsset<Sprite>("Assets/FuturamaItems/benderbyjordandiazandres.png");
                 bender.itemIcon = benderSprite;
 
             }
+        }
 
+        private void UpdateBenderSFX(ref Item bender, ref AssetBundle futuramaBundle)
+        {
 
             if (bender.dropSFX == null || bender.grabSFX == null || bender.pocketSFX == null || bender.throwSFX == null)
             {
 
                 FuturamaItemModBase.Instance.mls.LogError("For some reason Bender doesn't have any sound effects attached");
 
-                AudioClip benderGrabClip = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_heywhatsthis.mp3");
-                AudioClip benderPocketClip = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_youstupid.mp3");
-                AudioClip benderDropClip = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_heyfleshies.mp3");
-                AudioClip benderThrowClip = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_doaflip.mp3");
+                AudioClip benderGrabClip = futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_heywhatsthis.mp3");
+                AudioClip benderPocketClip = futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_youstupid.mp3");
+                AudioClip benderDropClip = futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_heyfleshies.mp3");
+                AudioClip benderThrowClip = futuramaBundle.LoadAsset<AudioClip>("Assets/FuturamaItems/bender_doaflip.mp3");
 
                 bender.dropSFX = benderDropClip;
                 bender.grabSFX = benderGrabClip;
@@ -44,8 +65,10 @@ namespace FuturamaItems.Patches
                 bender.throwSFX = benderThrowClip;
             }
 
+        }
 
-
+        private void UpdateBenderComponents(ref Item bender, ref AssetBundle futuramaBundle)
+        {
             if (bender.spawnPrefab.GetComponent<PhysicsProp>() == null)
             {
 
@@ -81,7 +104,7 @@ namespace FuturamaItems.Patches
                 {
                     FuturamaItemModBase.Instance.mls.LogError("We don't have an audio mixer group on this either?");
 
-                    AudioMixerGroup benderMixerGroup = FuturamaItemModBase.Instance.futuramaBundle.LoadAsset<AudioMixerGroup>("Assets/FuturamaItems/DiageticMixer.mixer");
+                    AudioMixerGroup benderMixerGroup = futuramaBundle.LoadAsset<AudioMixerGroup>("Assets/FuturamaItems/DiageticMixer.mixer");
 
                     benderAudioSource.outputAudioMixerGroup = benderMixerGroup;
                     benderAudioSource.playOnAwake = false;
@@ -110,6 +133,13 @@ namespace FuturamaItems.Patches
                 benderScanNodeScript.nodeType = 2;
                 benderScanNodeScript.requiresLineOfSight = true;
             }
+        }
+
+
+
+
+        private void RegisterItem(ref Item bender)
+        {
 
             NetworkPrefabs.RegisterNetworkPrefab(bender.spawnPrefab);
 
@@ -119,6 +149,20 @@ namespace FuturamaItems.Patches
             //Register item as scrap and as shop item
             Items.RegisterScrap(bender, 300, Levels.LevelTypes.All);
 
+            FuturamaItemModBase.Instance.mls.LogInfo($"Patched {FuturamaItemModBase.Instance} with additional item: Bender Figurine");
+
         }
+
+        public void SetupBenderItem()
+        {
+            LoadBenderAsset(ref FuturamaItemModBase.Instance.bender, ref FuturamaItemModBase.Instance.futuramaBundle);
+            UpdateBenderIcon(ref FuturamaItemModBase.Instance.bender, ref FuturamaItemModBase.Instance.futuramaBundle);
+            UpdateBenderSFX(ref FuturamaItemModBase.Instance.bender, ref FuturamaItemModBase.Instance.futuramaBundle);
+            UpdateBenderComponents(ref FuturamaItemModBase.Instance.bender, ref FuturamaItemModBase.Instance.futuramaBundle);
+            RegisterItem(ref FuturamaItemModBase.Instance.bender);
+
+        }
+
+
     }
 }
