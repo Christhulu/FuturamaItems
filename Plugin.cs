@@ -16,7 +16,7 @@ namespace FuturamaItems
     {
         private const string PLUGIN_GUID = "csalex.futuramaItems";
         private const string PLUGIN_NAME = "Futurama Items";
-        private const string PLUGIN_VERSION = "2.0.0";
+        private const string PLUGIN_VERSION = "2.1.0";
 
         public static FuturamaItemModBase Instance;
         //Create Logging Source
@@ -44,7 +44,6 @@ namespace FuturamaItems
                 mls.LogError("Failed to load custom assets."); // ManualLogSource for your plugin
                 return;
             }
-
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PLUGIN_GUID);
             mls.LogInfo("Patched Futurama Items Mod");

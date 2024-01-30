@@ -1,7 +1,7 @@
 {
     "name": "FuturamaItems",
     "author": "Christhulu",
-    "version_number": "2.0.0",
+    "version_number": "2.1.0",
     "website_url": "https://github.com/Christhulu/FuturamaItems",
     "description": "Adds items based on the TV show Futurama to Lethal Company. Currently only contains a Life sized Bender Figurine as a scrap item (I can't make it smaller yet)",
     "dependencies": [

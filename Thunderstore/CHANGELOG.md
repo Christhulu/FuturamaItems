@@ -1,3 +1,6 @@
+-   **2.1.0**
+    - Code restructuring, optimizations
+
 -   **2.0.0**
     -   Added 3 new songs to the boombox item based on the show
         -  Christopher Tyng "Futurama Original Series Mix (C.Tyng Extended Remix)" (Old radio Remix)
